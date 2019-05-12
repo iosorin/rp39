@@ -1,0 +1,140 @@
+@require '~vuetify/src/stylus/settings/_colors'
+
+$theme := {
+  primary:     $grey.lighten-3
+  accent:      $indigo.accent-3
+  secondary:   $grey.lighten-1
+  info:        $blue.lighten-1
+  warning:     $amber.darken-2
+  error:       $red.accent-4
+  success:     $green.lighten-2
+}
+
+@require '~vuetify/src/stylus/app'
+
+
+::selection
+  background-color rgba(255,255,255,.99)
+  color: #111
+b::selection
+  color orange
+    
+
+.pointer
+  cursor pointer
+
+.relative
+  position relative
+    
+.page
+  @extend .fade-transition
+
+body, html
+  height 100vh
+  overflow hidden
+
+.auth
+  &-leave-active
+    transition all .35s ease-in-out
+  &-enter-active
+    transition all 1s ease-in-out
+  &-enter,
+  &-leave-active
+    opacity 0
+   
+.auth-form
+  &_btn
+    width 200px
+    
+
+.v-snack__content
+  justify-content center !important
+  &::selection
+    background-color black
+  p
+    margin 0 !important
+    
+a
+  text-decoration none !important
+  border none !important    
+
+.b20
+  bottom 20px !important  
+
+.h100
+  height 100%  
+
+.w100
+  width 100%
+  
+.start
+  align-items flex-start !important  
+
+.submit-status
+  .green--text
+    white-space pre
+    
+.cover
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%  
+
+.vcenter
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  
+.v-snack__content
+  max-width 300px   !important
+  cursor default !important
+  
+.al-end
+   align-items: flex-end !important
+
+.bottom-links
+  position absolute
+  bottom 40px
+  left 15px
+
+.dialog-y
+  overflow-y visible !important
+  box-shadow none !important
+
+sb-width = 5px
+sb-bdrs = 15px
+
+.c-scrollbar
+  &::-webkit-scrollbar
+    width sb-width
+    height sb-width
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb
+    border-radius sb-bdrs
+
+  &::-webkit-scrollbar-track
+    background rgba(0,0,0,0.1)
+  &::-webkit-scrollbar-thumb
+    background rgba(0,0,0,0.2)
+  &::-webkit-scrollbar-thumb:hover
+    background rgba(0,0,0,0.4)
+  &::-webkit-scrollbar-thumb:active
+    background rgba(0,0,0,.9)
+
+#message-form
+  .v-input__slot
+    min-height 52px
+  textarea
+    max-height 165px !important
+    margin-right 47px !important
+    overflow-y auto
+    @extend .c-scrollbar
+
+@media only screen and (max-width : 1600px)
+  .v-navigation-drawer > .v-list:not(.v-list--dense) .v-list__tile
+    font-size 13px !important
+  body, html
+    overflow-y visible

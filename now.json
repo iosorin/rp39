@@ -1,0 +1,6 @@
+{
+	"version":2,
+	"name":"rp39",
+	"alias": ["rp39.officialosorina.now.sh"],
+	"builds":[{"src":"package.json","use":"@now/static-build"}]
+}
