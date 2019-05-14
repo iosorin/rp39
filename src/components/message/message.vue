@@ -31,48 +31,57 @@
 </template>
 
 <script >
-    export default {
-      data () {
-        return {
-          message: ''
+  export default {
+    data () {
+      return {
+        message: ''
+      }
+    },
+    computed: {
+      formattedMessage () {
+        const mes = this.htmlChars(this.message)
+          .replace(/(\r\n|\n|\r)/gm, '<br>')
+          .split('<br><br>')
+        const text = this.rRight(mes)
+          .map(m => this.str(m) ? '<p>' + m + '</p>' : '<br/>')
+          .join('')
+        console.log(text)
+        return text
+      }
+    },
+    methods: {
+      handleMessage () {
+        if (!this.str(this.message)) return
+        const message = {
+          text: this.message,
+          html: this.formattedMessage
         }
+        this.$emit('handleMessage', message)
+        this.$refs.form.reset()
+        document.querySelector('textarea').style.height = ''
       },
-      computed: {
-        formattedMessage () {
-          const arr = this.message
-            .replace(/</gm, '&lt').replace(/>/gm, '&gt')
-            .replace(/(\r\n|\n|\r)/gm, '<br>')
-            .split('<br><br>')
-          const text = this.rRight(arr)
-            .map(m => this.str(m) ? '<p>' + m + '</p>' : '<br/>')
-            .join('')
-          console.log(text)
-          return text
-        }
+      str (s) {
+        return s && s.trim().length
       },
-      methods: {
-        handleMessage () {
-          if (!this.str(this.message)) return
-          const message = {
-            text: this.message,
-            html: this.formattedMessage
-          }
-          this.$emit('handleMessage', message)
-          this.$refs.form.reset()
-          document.querySelector('textarea').style.height = ''
-        },
-        str (s) {
-          return s && s.trim().length
-        },
-        rRight (arr) {
-          return arr.reduceRight((result, a) => {
-            return (result.length === 0 && a === '') || (result.length === 0 && a === '<br>')
-              ? result
-              : [a].concat(result)
-          }, [])
+      htmlChars (str) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
         }
+        return str.replace(/[&<>"']/g, (m) => map[m])
+      },
+      rRight (arr) {
+        return arr.reduceRight((result, a) => {
+          return (result.length === 0 && a === '') || (result.length === 0 && a === '<br>')
+            ? result
+            : [a].concat(result)
+        }, [])
       }
     }
+}
 </script>
 
 <style lang="stylus" scoped>
