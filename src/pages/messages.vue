@@ -47,6 +47,7 @@
             .then(() => {
               this.$store.dispatch('loadMessages')
             })
+          this.scrollDown()
         },
         scrollDown () {
           this.$nextTick(() => {
