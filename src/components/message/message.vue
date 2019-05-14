@@ -39,10 +39,14 @@
       },
       computed: {
         formattedMessage () {
-          const arr = this.message.replace(/(\r\n|\n|\r)/gm, '<br>').split('<br><br>')
+          const arr = this.message
+            .replace(/</gm, '&lt').replace(/>/gm, '&gt')
+            .replace(/(\r\n|\n|\r)/gm, '<br>')
+            .split('<br><br>')
           const text = this.rRight(arr)
             .map(m => this.str(m) ? '<p>' + m + '</p>' : '<br/>')
             .join('')
+          console.log(text)
           return text
         }
       },
